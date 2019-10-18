@@ -96,7 +96,7 @@ public class CarrinhoController {
 			@ApiResponse(code = 403, message = "Acesso Restrito. Você não possuí permissão para fazer essa interação"),
 			@ApiResponse(code = 404, message = "Não Encontrado. Não conseguimos achar o serviço que você precisa"),
 			@ApiResponse(code = 500, message = "Erro Interno. Desculpe, não conseguimos fazer o que você precisa, verifique suas configurações ou tente novamente mais tarde"),})
-	public ResponseEntity<?> save(
+	public ResponseEntity<?> post(
 			@ApiParam(value = "Atributos do Carrinho que será criado ", required = true) @Valid @RequestBody Carrinho entity) throws Exception {
 
 			entity = service.post(entity);

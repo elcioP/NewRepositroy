@@ -28,6 +28,7 @@ public class CarrinhoService {
 	public boolean delete(Long id){
 		if(id != null){
 			repository.deleteById(id);
+			return true;
 		}
 		return false;
 	}
@@ -35,6 +36,7 @@ public class CarrinhoService {
 	public boolean delete(Carrinho entidade){
 		if(entidade != null){
 			repository.delete(entidade);
+			return true;
 		}
 		return false;
 	}

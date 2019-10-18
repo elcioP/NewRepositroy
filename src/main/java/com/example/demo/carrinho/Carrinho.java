@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,6 +34,7 @@ public class Carrinho {
 	private Date dataPagamento;
 	
 	@ApiModelProperty(notes = "lista de produtos que estão no  carrinho")
+	@Transient
 	@OneToMany(orphanRemoval = true , mappedBy= "carrinho")
 	private List<Produto> produto;
 	
