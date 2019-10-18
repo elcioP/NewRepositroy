@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -105,7 +107,7 @@ public class CarrinhoTests extends ExemploApplicationTests  {
 	
 	
 	@Test
-	public void teste_dele_por_corpo() throws Exception {
+	public void test_delete_by_body() throws Exception {
 		LOG.info("CHAMANDO O DELETE POR CORPO");
 
 		String content = this.mapper.writeValueAsString(this.entity);
@@ -115,6 +117,20 @@ public class CarrinhoTests extends ExemploApplicationTests  {
 		ResultActions resp = this.mock
 				.perform(delete("/carrinho").content(content).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void test_validador_preco() throws Exception{
+		Assert.assertEquals(true, service.validarPrecoProduto(entity));
+	}
+	
+	@Test
+	public void test_valor_total_compra() throws Exception{
+		BigDecimal valor = BigDecimal.ZERO;
+		valor = valor.add(new BigDecimal(14.99));
+		valor = valor.add(new BigDecimal(49.99));
+		
+		Assert.assertEquals(valor, service.setValorTotal(entity).getValorTotal());
 	}
 
 }

@@ -11,6 +11,7 @@ import com.example.demo.repository.Produto;
 @Service
 public class CarrinhoService {
 	
+	
 	@Autowired
 	private CarrinhoRepository repository;
 	
@@ -68,10 +69,7 @@ public class CarrinhoService {
 		}
 		return false;
 	}
-	
-	
-	
-	
+
 	
 
 }
