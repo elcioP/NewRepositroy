@@ -58,6 +58,10 @@ public class Carrinho {
 	
 	@ApiModelProperty(notes = "nome do cliente")
 	private String nomeCliente;
+	
+	public void Carrinho(){
+		
+	}
 
 	public Long getId() {
 		return id;

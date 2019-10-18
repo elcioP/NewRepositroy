@@ -44,6 +44,15 @@ public class Produto {
 	@ManyToOne 
 	@JoinColumn(name = "produto")
 	public Carrinho carrinho;
+	
+	public void Produto(){
+		
+	}
+	public void Produto(String descricao, String nome){
+		this.descricao = descricao;
+		this.nome = nome;
+		
+	}
 
 	
 	public Long getId() {

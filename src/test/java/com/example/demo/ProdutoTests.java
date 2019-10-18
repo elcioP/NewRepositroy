@@ -75,7 +75,6 @@ public class ProdutoTests extends ExemploApplicationTests {
 	public void test_delete() throws Exception {
 		LOG.info("Produto Delete Called!");
 		
-		//service.save(this.entity);
 		Produto produto = service.findById(service.save(this.entity).getId());
 
 		ResultActions resp = this.mock.perform(delete("/produto/"+produto.getId()))
