@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.example.demo.carrinho.Carrinho;
 
 @Entity
@@ -34,9 +37,11 @@ public class Produto {
 	public BigDecimal preco;
 	
 	@ApiModelProperty(notes = "Data de Criação")
+	@CreationTimestamp
 	public Calendar createdAt;
 	
 	@ApiModelProperty(notes = "Data de Atualização")
+	@UpdateTimestamp
 	public Calendar updatedAt;
 	
 	@ApiModelProperty(notes = "Carrinho de compra que esse produto pode estar")

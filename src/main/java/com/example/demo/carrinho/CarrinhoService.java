@@ -18,6 +18,7 @@ public class CarrinhoService {
 	public Carrinho post(Carrinho entidade){
 		if(validarPrecoProduto(entidade)){
 			setValorTotal(entidade);
+			setQuantidadeProdutos(entidade);
 		}
 		return repository.save(entidade);
 	}
@@ -51,8 +52,10 @@ public class CarrinhoService {
 		
 		BigDecimal valorTotal = BigDecimal.ZERO;
 		for(Produto produto : produtos ){
-			
-			valorTotal = valorTotal.add(produto.getPreco());
+			if(produto.getPreco() != null){
+				
+				valorTotal = valorTotal.add(produto.getPreco());
+			}
 		}
 		entidade.setValorTotal(valorTotal);
 		return entidade;
@@ -68,6 +71,13 @@ public class CarrinhoService {
 			}
 		}
 		return false;
+	}
+	
+	public void setQuantidadeProdutos(Carrinho entidade){
+		if(entidade.getProduto() != null){
+			entidade.setQtdProduto(entidade.getProduto().size());
+		}
+		
 	}
 
 	

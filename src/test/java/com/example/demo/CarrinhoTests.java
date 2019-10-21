@@ -41,11 +41,11 @@ public class CarrinhoTests extends ExemploApplicationTests  {
 		Produto produto2 = new Produto();
 	
 		produto.setDescricao("produto de limpeza");
-		produto.setNome("veja bem");
+		produto.setNome("veja");
 		produto.setPreco(new BigDecimal(14.99));
 		
-		produto2.setDescricao("ursinho de pelúcia");
-		produto2.setNome("pimpão");
+		produto2.setDescricao("produto de lazer");
+		produto2.setNome("ursinho de pelúcia");
 		produto2.setPreco(new BigDecimal(49.99));
 		
 		produtos = new ArrayList<>();
@@ -131,6 +131,48 @@ public class CarrinhoTests extends ExemploApplicationTests  {
 		valor = valor.add(new BigDecimal(49.99));
 		
 		Assert.assertEquals(valor, service.setValorTotal(entity).getValorTotal());
+	}
+	
+	@Test
+	public void teste_qtd_produto() throws Exception{
+		service.setQuantidadeProdutos(entity);
+		Assert.assertEquals(2, entity.getQtdProduto());
+		
+	}
+	
+	@Test
+	public void test_update_at() throws Exception{
+		
+		Produto produto  = new Produto();
+		produto.setDescricao("produto de limpeza");
+		produto.setNome("alcool em gel");
+		produto.setPreco(new BigDecimal(5.99));
+		List <Produto> produtos = new ArrayList<>();
+		produtos.add(produto);
+		
+		Produto prod2 = new Produto();
+		prod2.setDescricao("produto de higiene");
+		prod2.setNome("escova de dente");
+		
+		
+		
+		Carrinho carrinho = new Carrinho();
+		carrinho.setNomeCliente("joão");
+		carrinho.setProduto(produtos);
+		service.post(carrinho);
+		
+		System.out.println(carrinho.getCreateAt().getTime());
+		
+		produtos.add(prod2);
+		
+		carrinho.setProduto(produtos);
+
+		service.post(carrinho);
+		
+		carrinho.getUpdateAt();
+		
+		System.out.println(carrinho.getUpdateAt().getTime());
+		
 	}
 
 }
