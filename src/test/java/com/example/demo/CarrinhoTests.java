@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -146,33 +148,60 @@ public class CarrinhoTests extends ExemploApplicationTests  {
 		Produto produto  = new Produto();
 		produto.setDescricao("produto de limpeza");
 		produto.setNome("alcool em gel");
-		produto.setPreco(new BigDecimal(5.99));
-		List <Produto> produtos = new ArrayList<>();
-		produtos.add(produto);
+		produto.setPreco(new BigDecimal(5.00));
 		
 		Produto prod2 = new Produto();
 		prod2.setDescricao("produto de higiene");
 		prod2.setNome("escova de dente");
+		prod2.setPreco(new BigDecimal(10.00));
 		
+		Produto prod3 = new Produto();
+		prod3.setNome("Carro");
+		prod3.setDescricao("produto automobilistico");
+		prod3.setPreco(new BigDecimal(30.00));
 		
 		
 		Carrinho carrinho = new Carrinho();
 		carrinho.setNomeCliente("joão");
-		carrinho.setProduto(produtos);
-		service.post(carrinho);
+		carrinho.setProduto(Arrays.asList(produto, prod2, prod3));
+		BigDecimal valorTotal = BigDecimal.ZERO;
 		
-		System.out.println(carrinho.getCreateAt().getTime());
+//		carrinho.getProduto().forEach(p -> valorTotal = valorTotal.add(p.getPreco()));
+		for(Produto p : carrinho.getProduto()){
+			valorTotal =	valorTotal.add(p.getPreco());
+		}
+		carrinho.setValorTotal(valorTotal);
 		
-		produtos.add(prod2);
+		System.out.println(carrinho.getValorTotal());
 		
-		carrinho.setProduto(produtos);
+		
 
-		service.post(carrinho);
 		
-		carrinho.getUpdateAt();
 		
-		System.out.println(carrinho.getUpdateAt().getTime());
 		
 	}
+	
+	
+	
+	@Test
+	public void test_caellum(){
+
+		List<String> palavras = Arrays.asList(" LETS GO da silva junior zibranium duas vezes zibranium","zibranium","rodrigo", "paulo", "caelum", "pi"); 
+//		
+//		for(String p : palavras){
+//			System.out.println(p);
+//		}
+//		
+		Comparator<String> comparador = (s1, s2) -> Integer.compare(s1.length(), s2.length());
+	
+		palavras.sort(comparador);
+		
+		System.out.println("<------------------------------------------------------>");
+		
+		palavras.forEach(p -> System.out.println(p));
+		
+		
+	}
+	
 
 }
