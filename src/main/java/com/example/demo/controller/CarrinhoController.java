@@ -37,8 +37,6 @@ public class CarrinhoController {
 	@Autowired
 	private CarrinhoService service;
 	
-	
-	
 	@GetMapping()
 	@ApiOperation(value = "Retorna a lista de todos os Carrinhos de compra", response = List.class)
 	@ApiResponses(value = {
