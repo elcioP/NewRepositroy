@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,30 +25,45 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "ID do Produto")
-	public Long id;
+	private Long id;
 	
 	@ApiModelProperty(notes = "Nome do Produto")
-	public String nome;
+	private String nome;
 	
 	@ApiModelProperty(notes = "Descrição do Produto")
-	public String descricao;
+	private String descricao;
 	
 	@ApiModelProperty(notes = "Preço do Produto")
-	public BigDecimal preco;
+	private BigDecimal preco;
 	
 	@ApiModelProperty(notes = "Data de Criação")
 	@CreationTimestamp
-	public Calendar createdAt;
+	private Calendar createdAt;
 	
 	@ApiModelProperty(notes = "Data de Atualização")
 	@UpdateTimestamp
-	public Calendar updatedAt;
+	private Calendar updatedAt;
 	
 	@ApiModelProperty(notes = "Carrinho de compra que esse produto pode estar")
-	
 	@ManyToOne 
 	@JoinColumn(name = "produto")
-	public Carrinho carrinho;
+	private Carrinho carrinho;
+	
+	@ApiModelProperty(notes = "Categoria do produto")
+	@ManyToOne
+	@JoinColumn(name = "categoria")
+	private Categoria categoria;
+	
+	
+	@ApiModelProperty(notes = "Reclacionamento do produto com a venda")
+	@ManyToOne
+	@JoinColumn(name = "produtoVenda")
+	private ProdutoVenda produtoVenda;
+	
+	@ManyToOne
+	@JoinColumn(name = "produtoLeilao")
+	private ProdutoLeilao produtoLeilao;
+	
 	
 	public void Produto(){
 		
@@ -108,6 +123,30 @@ public class Produto {
 		this.updatedAt = updatedAt;
 	}
 
+	public ProdutoVenda getProdutoVenda() {
+		return produtoVenda;
+	}
+	public void setProdutoVenda(ProdutoVenda produtoVenda) {
+		this.produtoVenda = produtoVenda;
+	}
+	public Carrinho getCarrinho() {
+		return carrinho;
+	}
+	public void setCarrinho(Carrinho carrinho) {
+		this.carrinho = carrinho;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	public ProdutoLeilao getProdutoLeilao() {
+		return produtoLeilao;
+	}
+	public void setProdutoLeilao(ProdutoLeilao produtoLeilao) {
+		this.produtoLeilao = produtoLeilao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

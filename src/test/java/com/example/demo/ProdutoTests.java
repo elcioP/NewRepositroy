@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.example.demo.repository.Produto;
+import com.example.demo.model.Produto;
 import com.example.demo.repository.ProdutoService;
 
 public class ProdutoTests extends ExemploApplicationTests {

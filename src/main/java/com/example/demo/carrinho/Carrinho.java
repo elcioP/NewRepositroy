@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.example.demo.repository.Produto;
+import com.example.demo.model.Produto;
 import com.example.demo.util.FormaPagamento;
 
 @Entity
@@ -34,7 +34,6 @@ public class Carrinho {
 	private Date dataPagamento;
 	
 	@ApiModelProperty(notes = "lista de produtos que estão no  carrinho")
-	@Transient
 	@OneToMany(orphanRemoval = true , mappedBy= "carrinho")
 	private List<Produto> produto;
 	

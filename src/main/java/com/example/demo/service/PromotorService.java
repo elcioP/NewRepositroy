@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Convidado;
 import com.example.demo.model.Promotor;
+import com.example.demo.repository.ConvidadoRepository;
 import com.example.demo.repository.PromotorRepository;
 
 
@@ -15,6 +15,9 @@ public class PromotorService {
 	
 	@Autowired
 	private PromotorRepository repository;
+	
+	@Autowired
+	ConvidadoRepository convidadoRepository;
 	
 	
 	public Promotor save(Promotor entity ){
@@ -47,15 +50,14 @@ public class PromotorService {
 		return false;
 	}
 	
-	public Integer contarConvidados(Long id){
-		Integer convidados = 0;
+	public int contarConvidados(Long id){
+		
 		Promotor promotor = this.findById(id);
-		if(promotor != null && promotor.getConvidados() != null){
-			for(Convidado convidado : promotor.getConvidados() ){
-				convidados ++;
+			if(promotor.getEvento() != null){
+				promotor.setConvidados(convidadoRepository.findByEventoIdAndPromotorId(promotor.getEvento().getId(), promotor.getId()));
 			}
-		}
-		return convidados;
+		promotor.getConvidados().forEach(c -> System.out.println(c.getNome()));
+		return  1;
 	}
 
 }

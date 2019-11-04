@@ -31,7 +31,6 @@ import com.example.demo.service.ConvidadoService;
 @RequestMapping("/convidado")
 @SpringBootApplication
 @Api(value = "value", description = "Endpoints para gerenciamento de convidados de eventos")
-
 public class ConvidadoController {
 	
 	

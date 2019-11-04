@@ -20,7 +20,7 @@ public class PessoaGen implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes = "ID da pessoa")
-	protected long id;
+	protected Long id;
 	
 	@ApiModelProperty(notes = "data de criação")
 	@CreationTimestamp
@@ -29,19 +29,19 @@ public class PessoaGen implements Serializable{
 	@ApiModelProperty(notes = "data que foi alterado")
 	@UpdateTimestamp
 	protected Date alterado;
-	
+
 	public PessoaGen(){
 		
 	}
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public Date getCriado() {
 		return criado;
+	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public void setCriado(Date criado) {
 		this.criado = criado;
@@ -56,7 +56,7 @@ public class PessoaGen implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -68,9 +68,11 @@ public class PessoaGen implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PessoaGen other = (PessoaGen) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-
 }

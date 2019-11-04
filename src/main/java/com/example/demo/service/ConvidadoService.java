@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Convidado;
@@ -43,6 +44,10 @@ public class ConvidadoService {
 			return true;
 		}
 		return false;
+	}
+	
+	public Convidado findByNome(String nome){
+		return repository.findByNome(nome);
 	}
 	
 }

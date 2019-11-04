@@ -33,6 +33,13 @@ public class Evento implements Serializable{
 	@ApiModelProperty(notes = "Lista de convidados")
 	@OneToMany(mappedBy= "evento")
 	private List<Promotor> promotores;
+	
+	public Evento(){
+		
+	}
+	public Evento(String nomeEvento){
+			this.nomeEvento = nomeEvento;
+		}
 
 	public Long getId() {
 		return id;

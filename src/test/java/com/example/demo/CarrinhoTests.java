@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.demo.carrinho.Carrinho;
 import com.example.demo.carrinho.CarrinhoService;
-import com.example.demo.repository.Produto;
+import com.example.demo.model.Produto;
 
 public class CarrinhoTests extends ExemploApplicationTests  {
 	

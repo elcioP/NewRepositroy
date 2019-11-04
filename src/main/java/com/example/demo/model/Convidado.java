@@ -34,6 +34,11 @@ public class Convidado extends PessoaGen {
 		
 	}
 	
+	public Convidado(String nome, String documento){
+		this.nome = nome;
+		this.documento = documento;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

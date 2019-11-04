@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.carrinho.Carrinho;
 import com.example.demo.carrinho.CarrinhoService;
-import com.example.demo.repository.Produto;
+import com.example.demo.model.Produto;
 
 
 @RestController 

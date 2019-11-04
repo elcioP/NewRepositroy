@@ -6,6 +6,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -14,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
+import com.example.demo.model.Convidado;
+import com.example.demo.model.Evento;
 import com.example.demo.model.Promotor;
+import com.example.demo.service.EventoService;
 import com.example.demo.service.PromotorService;
 import com.example.demo.util.TipoPessoa;
 
@@ -24,7 +30,12 @@ public class PromotorTest extends ExemploApplicationTests  {
 	@Autowired
 	private PromotorService promotorService;
 	
+	@Autowired
+	private EventoService eventoService;
+	
 	private Promotor promotor;
+	List<Convidado> convidados = new ArrayList<>();
+	Evento evento = new Evento("inauguração");
 	
 	@Before
 	public void criarEntidade(){
@@ -32,6 +43,9 @@ public class PromotorTest extends ExemploApplicationTests  {
 		promotor.setNome("promotor");
 		promotor.setDocumento("213213");
 		promotor.setTipo(TipoPessoa.PROMOTOR);
+		
+		convidados.add(new Convidado("convidado 1" , "4002-8922"));
+		convidados.add(new Convidado("convidado 1" , "0800"));
 	}
 	
 	@Test
@@ -82,6 +96,21 @@ public class PromotorTest extends ExemploApplicationTests  {
 		String content = this.mapper.writeValueAsString(promotor);
 		
 		ResultActions resp = this.mock.perform(get("/promotor/" + promotor.getId()))
+				.andExpect(status().isOk());
+		
+	}
+	
+	@Test
+	public void test_contar_convidados()throws Exception{
+		eventoService.save(evento);
+		promotor.setEvento(evento);
+		promotor.setConvidados(convidados);
+		
+		promotorService.save(promotor);
+		
+		String content = this.mapper.writeValueAsString(promotor);
+		
+		ResultActions resp = this.mock.perform(get("/promotor/quantidade-convidados/" + promotor.getId()))
 				.andExpect(status().isOk());
 		
 	}

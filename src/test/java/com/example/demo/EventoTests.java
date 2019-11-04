@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.demo.model.Evento;
 import com.example.demo.service.EventoService;
+import com.example.demo.service.FecharEventoService;
 
 public class EventoTests extends ExemploApplicationTests {
 	private static final Logger LOG = LoggerFactory.getLogger(EventoTests.class);
@@ -26,6 +27,8 @@ public class EventoTests extends ExemploApplicationTests {
 	
 	@Autowired
 	EventoService service;
+	
+	
 	
 	@Before
 	public void criarEntidade(){
@@ -65,7 +68,7 @@ public class EventoTests extends ExemploApplicationTests {
 	}
 	
 	@Test
-	public void test_Post_All() throws Exception{
+	public void test_get_All() throws Exception{
 		service.save(evento);
 		
 		String content = this.mapper.writeValueAsString(evento);
@@ -75,14 +78,15 @@ public class EventoTests extends ExemploApplicationTests {
 	}
 	
 	@Test
-	public void test_post_by_id()throws Exception{
+	public void test_get_by_id()throws Exception{
 		service.save(evento);
 		
 		String content = this.mapper.writeValueAsString(evento);
 		
-		ResultActions resp = this.mock.perform(get("/promotor/" + evento.getId()))
+		ResultActions resp = this.mock.perform(get("/evento/" + evento.getId()))
 				.andExpect(status().isOk());
 		
 	}
 	
+
 }
